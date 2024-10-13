@@ -4,9 +4,20 @@ dotenv.load_dotenv()
 
 openai = OpenAI(api_key=os.environ.get('OPENAI_API_KEY'))
 
-print("Bienvenido a ChatGPT")
+print("Bienvenido a ShellGPT")
 print("Que quieres saber?")
 prompt = input("User: ")
+historyChat = [
+    {
+        'role': 'system',
+        'content': 'Eres un asistente que da respuestas cortas y concretas, preferentemente en español'
+    },
+    {
+        'role': 'user',
+        'content': prompt
+    }
+]
+
 
 while True:
     if (
@@ -19,23 +30,43 @@ while True:
         prompt.lower() == "olvida lo"
         ):
         break
+
+    # Generacion de la respuesta 
     response = openai.chat.completions.create(
-        model='gpt-3.5-turbo',
-        messages=[
-            {
-                'role': 'system',
-                'content': 'Eres un asistente que da respuestas cortas y concretas'
-            },
-            {
-                'role': 'user',
-                'content': prompt
-            }
-        ],
+        model='gpt-4o',
+        messages=historyChat
+        ### MODIFICADO para mantener una conversacion con historyChat[]
+        # messages=[
+        #     {
+        #         'role': 'system',
+        #         'content': 'Eres un asistente que da respuestas cortas y concretas, preferentemente en español'
+        #     },
+        #     {
+        #         'role': 'user',
+        #         'content': prompt
+        #     }
+        # ],
+        ## Para imprimir las palabras por partes
         # stream=True
+
     )
+
     # Impresion de respuesta
     print("ChatGPT: ",response.choices[0].message.content, "\n")
+    historyChat.append(
+        {
+            'role': 'assistant',
+            'content': response.choices[0].message.content
+        }
+    )
 
+    # Nueva consulta
     prompt = input("Deseas saber algo mas?\nUser: ")
+    historyChat.append(
+        {
+            'role': 'user',
+            'content': prompt
+        }
+    )
 
 print("Good bye ;)")
