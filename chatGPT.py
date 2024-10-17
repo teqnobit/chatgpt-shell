@@ -3,10 +3,18 @@ from openai import OpenAI
 dotenv.load_dotenv()
 
 openai = OpenAI(api_key=os.environ.get('OPENAI_API_KEY'))
+prompt = ""
+
+def goodbye():
+    print("\nGood bye ;)")
+    exit()
 
 print("Bienvenido a ShellGPT")
 print("Que quieres saber?")
-prompt = input("User: ")
+try:
+    prompt = input("User: ")
+except KeyboardInterrupt:
+    goodbye()
 historyChat = [
     {
         'role': 'system',
@@ -19,7 +27,7 @@ historyChat = [
 ]
 
 
-while True:
+while prompt:
     if (
         prompt.lower() == "exit" or \
         prompt.lower() == "salir" or \
@@ -46,7 +54,7 @@ while True:
         #         'content': prompt
         #     }
         # ],
-        ## Para imprimir las palabras por partes
+        ## Para imprimir la respuesta por segmentos
         # stream=True
 
     )
@@ -61,7 +69,10 @@ while True:
     )
 
     # Nueva consulta
-    prompt = input("Deseas saber algo mas?\nUser: ")
+    try:
+        prompt = input("Deseas saber algo mas?\nUser: ")
+    except KeyboardInterrupt:
+        goodbye()
     historyChat.append(
         {
             'role': 'user',
@@ -69,4 +80,4 @@ while True:
         }
     )
 
-print("Good bye ;)")
+goodbye()
