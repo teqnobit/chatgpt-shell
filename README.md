@@ -14,6 +14,11 @@ Modificando lo que es necesario. Ya deberiamos de tener acceso a la API de chatg
 
 
 ## Instalacion de la aplicacion
+Para ejecutar la aplicacion es tan sencillo como ejecutar el script de python en una terminal.
+```shell
+python3 chatGPT.py
+```
+
 Para optimizar la operacion de la aplicacion de forma eficiente dentro de nuestra terminal es importante tener la aplicacion accecible mediante un **alias**. Para ello sera necesario crear un entorno virtual *(de nombre venv)* e instalar los requerimientos.
 
 Luego procedemos a abrir la configuracion de nuestra shell, **.bashrc** para la consola bash y **.zshrc** para la consola zsh. En mi caso usare zsh y podemos modificar la configuracion usando *nano*.
