@@ -4,7 +4,7 @@ Aplicacion sencilla manipulando la API de ChatGPT para la consola de linux.
 ## Instalacion de dotenv
 Para hacer funcionan la api es importante gestionar la key de la API de  forma segura, para ello se usa la libreria de dotenv.
 
-Crearemos un archivo de nombre **.env** y le incluiremos la siguiente linea:
+Crearemos un archivo de nombre **.env** basado en el template y le modificaremos la siguiente linea para incluir nuestra **API KEY**:
 
 ```shell
 OPENAI_API_KEY='Aqui va tu key de chatgpt'
